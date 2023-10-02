@@ -14,6 +14,7 @@ The code for CS427 Android app.
 | Sukin Kumar Krishnasamy |sk119|sukin98|Developer|Java, Python, SQL, Firebase, MongoDB|
 | Sivaa Shaanth Suman Rani Sivanath Babu|ssr10|sivaa-shaanth|Developer|Java, Python, SQL|
 | Ishika Awachat |awachat2|ishikaawachat|Developer|C++, Python, Java, SQL, HTML, Javascript|
+| Zihan Qiu |Zihanq3|qiuzan2001|Developer|C++, Java, Python, SQL|
 <br/>
 
 
