@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".SignupActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,17 +27,17 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/signupButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login" />
+            android:text="Sign Up" />
 
         <TextView
-            android:id="@+id/signupLink"
+            android:id="@+id/loginLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Don't have an account? Sign Up"
+            android:text="Already have an account? Login"
             android:textColor="?android:attr/colorAccent"
             android:paddingTop="16dp" />
 
