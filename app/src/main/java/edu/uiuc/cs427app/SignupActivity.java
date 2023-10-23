@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,14 +39,9 @@ public class SignupActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 // Register User
-                try {
-                    register(username, password);
-                } catch (Exception e) {
-                    Log.e("SignupActivity", "Exception occurred", e);
-                }
+                register(username, password);
             }
         });
-
         loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,8 +52,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-    private void register(String username, String password) throws Exception {
-        //TODO
+    private void register(String username, String password) {
         Cursor cursor = db.query(
                 "User", // Table name
                 null,   // Columns; null means all columns
@@ -71,8 +64,12 @@ public class SignupActivity extends AppCompatActivity {
         );
 
         if (!cursor.moveToFirst()) {
-            // User exists, retrieve data
-            setContentView(R.layout.activity_main);
+            dbHelper.insertSampleUser(db, username, password);
+            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            TextView errorTextView = findViewById(R.id.errorTextView);
+            errorTextView.setVisibility(View.VISIBLE);
         }
 
         cursor.close();

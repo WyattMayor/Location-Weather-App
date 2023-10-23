@@ -2,15 +2,15 @@ package edu.uiuc.cs427app.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "UserData.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Define the table creation SQL statement
     private static final String CREATE_USER_TABLE = "CREATE TABLE User ("
-            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + "username TEXT NOT NULL,"
+            + "username TEXT PRIMARY KEY NOT NULL,"
             + "password TEXT NOT NULL);";
 
     private static final String CREATE_ITEM_TABLE = "CREATE TABLE Item ("
@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "userName TEXT," // Add a foreign key reference to the User table
             + "FOREIGN KEY (userName) REFERENCES User(username));"; // Ensure referential integrity
 
+    private static final String INSERT_USER = "INSERT INTO User (username, password) VALUES (?, ?);";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -32,5 +33,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Implement database upgrade logic here if needed
+    }
+
+    public void insertSampleUser(SQLiteDatabase db, String username, String password) {
+        SQLiteStatement statement = db.compileStatement(INSERT_USER);
+        statement.bindString(1, username);
+        statement.bindString(2, password);
+        statement.executeInsert();
     }
 }
