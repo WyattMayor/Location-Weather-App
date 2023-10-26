@@ -13,16 +13,23 @@ import java.util.*;
 import android.database.sqlite.SQLiteDatabase;
 import edu.uiuc.cs427app.db.*;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+
+    private Button addLocationButton;
+
+    private Button removeLocationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         LinearLayout buttonContainer = findViewById(R.id.buttonContainer);
+        addLocationButton = findViewById(R.id.buttonAddLocation);
+        removeLocationButton = findViewById(R.id.buttonRemoveLocation);
         // Initializing the UI components
         // The list of locations should be customized per user (change the implementation so that
         // buttons are added to layout programmatically
@@ -70,6 +77,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             buttonContainer.addView(button);
 
         }
+        addLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddLocActivity.class);
+//                intent.putExtra("city", "Chicago");
+                startActivity(intent);
+            }
+        });
+
+        removeLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RemoveLocActivity.class);
+//                intent.putExtra("city", "Chicago");
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
     }
 
     @Override
@@ -77,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (view.getId()) {
             case R.id.buttonAddLocation:
-                // Implement this action to add a new location to the list of locations
+                intent = new Intent(this, SignupActivity.class);
+                startActivity(intent);
                 break;
             default:
                 Button clicked = (Button) view;
@@ -87,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("city", cityName);
                 startActivity(intent);
                 break;
+
 
         }
     }

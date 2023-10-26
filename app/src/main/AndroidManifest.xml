@@ -33,6 +33,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddLocActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".RemoveLocActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
