@@ -20,10 +20,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "FOREIGN KEY (userName) REFERENCES User(username));"; // Ensure referential integrity
 
     private static final String INSERT_USER = "INSERT INTO User (username, password) VALUES (?, ?);";
+
+    /**
+     * Constructs a new instance of the DatabaseHelper class.
+     *
+     * @param context The application context in which the database helper will be used.
+     */
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Called when the database is created for the first time. It executes SQL statements to create
+     * needed tables in the database.
+     *
+     * @param db The SQLiteDatabase instance in which the tables will be created.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
@@ -35,7 +47,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Implement database upgrade logic here if needed
     }
 
-    public void insertSampleUser(SQLiteDatabase db, String username, String password) {
+    /**
+     * Inserts a new user into the database with the provided username and password.
+     *
+     * @param db The SQLiteDatabase instance to which the user will be added.
+     * @param username The username of the user to be inserted.
+     * @param password The password associated with the user.
+     */
+    public void insertUser(SQLiteDatabase db, String username, String password) {
         SQLiteStatement statement = db.compileStatement(INSERT_USER);
         statement.bindString(1, username);
         statement.bindString(2, password);

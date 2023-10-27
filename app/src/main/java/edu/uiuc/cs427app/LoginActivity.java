@@ -22,6 +22,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextView signupLink;
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
+
+    /**
+     * Called when the activity is first created. It initializes the user interface elements,
+     * sets up event listeners for the login and signup actions, and handles user interaction.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     * shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +43,12 @@ public class LoginActivity extends AppCompatActivity {
         db = dbHelper.getReadableDatabase();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the login button is clicked. It retrieves the username and password from
+             * the input fields, then verifies the login credentials.
+             *
+             * @param v The view that was clicked, in this case, the login button.
+             */
             @Override
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
@@ -44,6 +58,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Called when the signup link is clicked. It creates an intent to redirect the user to
+         * the signup activity and initiates the activity transition.
+         *
+         * @param v The view that was clicked, in this case, the signup link.
+         */
         signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +75,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Logs in a user by checking their credentials in the database and navigating to the main activity if valid.
+     *
+     * This method queries the "User" table in the database to verify the provided username and password.
+     * If the user exists, it starts the MainActivity; otherwise, it displays an error message.
+     *
+     * @param username The username of the user attempting to log in.
+     * @param password The password of the user attempting to log in.
+     */
     private void login(String username, String password)  {
         Cursor cursor = db.query(
                 "User", // Table name

@@ -21,6 +21,14 @@ public class SignupActivity extends AppCompatActivity {
     private TextView loginLink;
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
+
+    /**
+     * Called when the SignupActivity is first created. It initializes the user interface elements,
+     * sets up event listeners for the signup and login actions, and handles user interaction.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     * shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,12 @@ public class SignupActivity extends AppCompatActivity {
         db = dbHelper.getWritableDatabase();
 
         signupButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the signup button is clicked. It retrieves the username and password from
+             * the input fields and initiates the user signup process.
+             *
+             * @param v The view that was clicked, in this case, the signup button.
+             */
             @Override
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
@@ -43,6 +57,12 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
         loginLink.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the login link is clicked. It creates an intent to redirect the user to
+             * the login activity and initiates the activity transition.
+             *
+             * @param v The view that was clicked, in this case, the login link.
+             */
             @Override
             public void onClick(View v) {
                 // Redirect to login activity.
@@ -52,6 +72,15 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Registers a user by checking if the provided username is unique and inserting the user
+     * into the database if it's not already registered. If registration is successful, it navigates
+     * to the main activity; otherwise, it displays an error message.
+     *
+     * @param username The username of the user to be registered.
+     * @param password The password associated with the user.
+     */
     private void register(String username, String password) {
         Cursor cursor = db.query(
                 "User", // Table name
@@ -64,7 +93,7 @@ public class SignupActivity extends AppCompatActivity {
         );
 
         if (!cursor.moveToFirst()) {
-            dbHelper.insertSampleUser(db, username, password);
+            dbHelper.insertUser(db, username, password);
             Intent intent = new Intent(SignupActivity.this, MainActivity.class);
             startActivity(intent);
         } else {
