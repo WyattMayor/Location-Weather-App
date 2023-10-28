@@ -1,6 +1,8 @@
 package edu.uiuc.cs427app;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.LinearLayout;
 import java.util.*;
 import android.database.sqlite.SQLiteDatabase;
 import edu.uiuc.cs427app.db.*;
+import java.io.Serializable;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button addLocationButton;
 
     private Button removeLocationButton;
+
+    private static final int RESULT_CODE = 1; // Variable returned from child function to notify parent function
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +39,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // The list of locations should be customized per user (change the implementation so that
         // buttons are added to layout programmatically
 
+        //call refresh which is initial list
+        refresh(Reference.CurrentUser);
+        addLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddLocActivity.class);
+                startActivityForResult(intent, RESULT_CODE); //Expect a return request code to notify its done
+            }
+        });
 
-        /*Query statements that query based on username
-        String query = "SELECT Item.city FROM Item " +
-                "INNER JOIN User ON Item.userName = User.username " +
-                "WHERE User.username = ?";*/
 
-        //for testing - Wyatt Mayor
-        String[] userLocations = {"Chicago", "Los Angeles", "Champaign", "New York", "New Jersey"};
-        List<String> userLocation = Arrays.asList(userLocations);
-        //List<String> userLocations = getUserLocations();
+        removeLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RemoveLocActivity.class);
+                startActivityForResult(intent, RESULT_CODE); //Expect a return request code to notify its done
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { // Handle request Code If Returned
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_CODE) {
+            if (resultCode == RESULT_OK) {
+                refresh(Reference.CurrentUser); // if the code returned ok then refresh the ui with new user list
+            }
+        }
+    }
+    public List<String> GetCityList(String username) {
+        DatabaseHelper dbhelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        List<String> cityList = new ArrayList<>();
+
+        // Search through table for cities from a specific user
+        String query = "SELECT city FROM Item WHERE userName = ?;";
+
+        // Run the query
+        Cursor cursor = db.rawQuery(query, new String[]{username});
+
+        // Check for Null values
+        if (cursor != null && cursor.moveToFirst()) {
+            if (cursor.moveToFirst()) {
+                do {
+                    //  Get the city name and add it to the list
+                    String cityName = cursor.getString(cursor.getColumnIndex("city"));
+                    cityList.add(cityName);
+                } while (cursor.moveToNext()); // continue this process until all cities are added to the list
+            }
+            cursor.close();
+        }
+        db.close();
+
+        return cityList; // return list of cities
+    }
+
+    public void refresh(String username) { //Refresh/Create buttons based on the specified user's list
+        LinearLayout buttonContainer = findViewById(R.id.buttonContainer);
+
+        // Clear the existing buttons
+        buttonContainer.removeAllViews();
+
+        List<String> userLocation = GetCityList(Reference.CurrentUser);
         for (String city : userLocation){
             //Create the button
             Button button= new Button(this);
@@ -77,29 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             buttonContainer.addView(button);
 
         }
-        addLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddLocActivity.class);
-//                intent.putExtra("city", "Chicago");
-                startActivity(intent);
-            }
-        });
-
-        removeLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RemoveLocActivity.class);
-//                intent.putExtra("city", "Chicago");
-                startActivity(intent);
-            }
-        });
-
-
-
-
-
     }
+
 
     @Override
     public void onClick(View view) {
