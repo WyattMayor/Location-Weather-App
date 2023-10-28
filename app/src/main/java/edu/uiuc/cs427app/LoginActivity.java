@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import edu.uiuc.cs427app.db.*;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 class Reference {
     public static String CurrentUser = "";
 }
@@ -76,11 +80,46 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Use the toggle button to switch themes
+        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+
+        //listener for detecting change in toggle status
+        themeSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    /**
+                     * Invoked when button status changed
+                     * @param status - on or off
+                     */
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean status) {
+                        // theme is switched based on button status
+                        if (status) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            compoundButton.setText(R.string.light_switch);
+                        } else {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            compoundButton.setText(R.string.dark_switch);
+                        }
+                    }
+                });
+    }
+
+
+    //To maintain the toggle status correctly after making a theme selection
+    @Override
+    protected void onResume() {
+        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            themeSwitch.setChecked(true);
+        } else {
+            themeSwitch.setChecked(false);
+        }
+        super.onResume();
     }
 
     /**
      * Logs in a user by checking their credentials in the database and navigating to the main activity if valid.
-     *
      * This method queries the "User" table in the database to verify the provided username and password.
      * If the user exists, it starts the MainActivity; otherwise, it displays an error message.
      *
