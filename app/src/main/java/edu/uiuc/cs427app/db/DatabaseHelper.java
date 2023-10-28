@@ -13,11 +13,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "username TEXT PRIMARY KEY NOT NULL,"
             + "password TEXT NOT NULL);";
 
+    private static final String CREATE_ITEMLIST_TABLE = "CREATE TABLE itemList ("
+            + "listID INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "cityList TEXT NOT NULL,"
+            + "User TEXT," // Add a foreign key reference to the User table
+            + "FOREIGN KEY (User) REFERENCES User(username));"; // Ensure referential integrity
+
     private static final String CREATE_ITEM_TABLE = "CREATE TABLE Item ("
             + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + "city TEXT NOT NULL,"
-            + "userName TEXT," // Add a foreign key reference to the User table
-            + "FOREIGN KEY (userName) REFERENCES User(username));"; // Ensure referential integrity
+            + "city TEXT NOT NULL," // Add a foreign key reference to the User table
+            + "listId INTEGER NOT NULL,"
+            + "FOREIGN KEY (listId) REFERENCES Item(listID));"; // Ensure referential integrity
 
     private static final String INSERT_USER = "INSERT INTO User (username, password) VALUES (?, ?);";
     public DatabaseHelper(Context context) {
@@ -27,6 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_ITEMLIST_TABLE);
         db.execSQL(CREATE_ITEM_TABLE);
     }
 
