@@ -20,7 +20,7 @@
             android:inputType="text" />
 
         <Button
-            android:id="@+id/addLocationButton"
+            android:id="@+id/AddLocationB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Location" />

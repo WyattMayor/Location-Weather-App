@@ -16,6 +16,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import edu.uiuc.cs427app.db.*;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
+class Reference {
+    public static String CurrentUser = "";
+}
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
@@ -135,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             // User exists, retrieve data
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Reference.CurrentUser = username;
             // Start the SignupActivity
             startActivity(intent);
         } else {

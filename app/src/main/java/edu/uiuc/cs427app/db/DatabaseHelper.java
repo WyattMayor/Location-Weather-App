@@ -1,8 +1,10 @@
 package edu.uiuc.cs427app.db;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "UserData.db";
@@ -13,17 +15,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "username TEXT PRIMARY KEY NOT NULL,"
             + "password TEXT NOT NULL);";
 
-    private static final String CREATE_ITEMLIST_TABLE = "CREATE TABLE itemList ("
-            + "listID INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + "cityList TEXT NOT NULL,"
-            + "User TEXT," // Add a foreign key reference to the User table
-            + "FOREIGN KEY (User) REFERENCES User(username));"; // Ensure referential integrity
-
     private static final String CREATE_ITEM_TABLE = "CREATE TABLE Item ("
             + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "city TEXT NOT NULL," // Add a foreign key reference to the User table
-            + "listId INTEGER NOT NULL,"
-            + "FOREIGN KEY (listId) REFERENCES Item(listID));"; // Ensure referential integrity
+            + "userName TEXT  NOT NULL,"
+            + "FOREIGN KEY (userName) REFERENCES User(username));"; // Ensure referential integrity
 
     private static final String INSERT_USER = "INSERT INTO User (username, password) VALUES (?, ?);";
 
@@ -45,7 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
-        db.execSQL(CREATE_ITEMLIST_TABLE);
         db.execSQL(CREATE_ITEM_TABLE);
     }
 
@@ -57,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Inserts a new user into the database with the provided username and password.
      *
-     * @param db The SQLiteDatabase instance to which the user will be added.
+     * @param db       The SQLiteDatabase instance to which the user will be added.
      * @param username The username of the user to be inserted.
      * @param password The password associated with the user.
      */
