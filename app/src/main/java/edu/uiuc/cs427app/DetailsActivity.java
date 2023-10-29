@@ -1,6 +1,8 @@
 package edu.uiuc.cs427app;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import edu.uiuc.cs427app.util.LogoutComponent;
 
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,6 +42,20 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         //Implement this (create an Intent that goes to a new Activity, which shows the map)
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        LogoutComponent.setupOptionsMenu(this, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (LogoutComponent.handleLogoutItemSelected(item, this)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

@@ -1,6 +1,5 @@
 package edu.uiuc.cs427app;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.GradientDrawable;
@@ -14,7 +13,11 @@ import android.widget.LinearLayout;
 import java.util.*;
 import android.database.sqlite.SQLiteDatabase;
 import edu.uiuc.cs427app.db.*;
-import java.io.Serializable;
+import edu.uiuc.cs427app.util.LogoutComponent;
+import edu.uiuc.cs427app.util.Reference;
+
+import android.view.Menu;
+import android.view.MenuItem;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -158,6 +161,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        LogoutComponent.setupOptionsMenu(this, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (LogoutComponent.handleLogoutItemSelected(item, this)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

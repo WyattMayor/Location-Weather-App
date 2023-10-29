@@ -15,11 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import edu.uiuc.cs427app.db.*;
+import edu.uiuc.cs427app.util.Reference;
+
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
-class Reference {
-    public static String CurrentUser = "";
-}
 
 public class LoginActivity extends AppCompatActivity {
 
