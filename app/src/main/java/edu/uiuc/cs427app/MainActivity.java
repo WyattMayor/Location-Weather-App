@@ -41,7 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     DatabaseHelper dbHelper;
     SQLiteDatabase db;
-
+    /**
+     * Called when the MainActivity is first created. It initializes the user interface elements,
+     * sets up event listeners for the remove and add action, and handles user interaction.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     * shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         refresh(Reference.CurrentUser);
         setTheme(Reference.CurrentUser);
         addLocationButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the Add button is clicked and starts the AddLocActivity.
+             * Starts the activity expecting a result code.
+             *
+             * @param v The view that was clicked, in this case, the add link.
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddLocActivity.class);
@@ -66,6 +78,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         removeLocationButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the remove button is clicked and starts the RemoveLocActivity.
+             * Starts the activity expecting a result code.
+             *
+             * @param v The view that was clicked, in this case, the add link.
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RemoveLocActivity.class);
@@ -88,20 +106,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         // theme is switched based on button status
                         if (status) {
                             updateTheme(Reference.CurrentUser,"1");
-//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                            compoundButton.setText(R.string.light_switch);
+                            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            //compoundButton.setText(R.string.light_switch);
                         } else {
                             updateTheme(Reference.CurrentUser,"0");
-//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                            compoundButton.setText(R.string.dark_switch);
+                            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            //compoundButton.setText(R.string.dark_switch);
                         }
                         setTheme(Reference.CurrentUser);
                     }
                 });
 
     }
-
-    //To maintain the toggle status correctly after making a theme selection
+    /**
+     * maintains the toggle status correctly after making a theme selection
+     */
     @Override
     protected void onResume() {
         setTheme(Reference.CurrentUser);
@@ -288,13 +307,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    /**
+     * Called when one of the list items is clicked and starts the DetailsActivity.
+     *
+     * @param v The view that was clicked, in this case, the add link.
+     */
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
-            case R.id.buttonAddLocation:
-                intent = new Intent(this, SignupActivity.class);
-                startActivity(intent);
-                break;
+            //case R.id.buttonAddLocation:
+                //intent = new Intent(this, SignupActivity.class);
+                //startActivity(intent);
+                //break;
             default:
                 Button clicked = (Button) view;
                 String cityName = clicked.getText().toString();

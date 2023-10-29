@@ -19,6 +19,13 @@ public class RemoveLocActivity extends AppCompatActivity{
 
     private Button RemoveLocationB;
     private EditText cityText;
+    /**
+     * Called when the RemoveLocActivity is first created. It initializes the user interface elements,
+     * sets up event listeners for the remove action, and handles user interaction.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     * shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,12 @@ public class RemoveLocActivity extends AppCompatActivity{
         cityText = findViewById(R.id.locationEditText);
 
         RemoveLocationB.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the Remove button is clicked. Removes the city from the database
+             * based on the current user. Sets result to notify the parent function it removed a city.
+             *
+             * @param v The view that was clicked, in this case, the remove link.
+             */
             @Override
             public void onClick(View v) {
                 String city = cityText.getText().toString().toLowerCase();//extract text from text box

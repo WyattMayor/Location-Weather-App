@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     SQLiteDatabase db;
 
     /**
-     * Called when the activity is first created. It initializes the user interface elements,
+     * Called when the LoginActivity is first created. It initializes the user interface elements,
      * sets up event listeners for the login and signup actions, and handles user interaction.
      *
      * @param savedInstanceState If the activity is being re-initialized after previously being

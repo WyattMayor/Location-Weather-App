@@ -15,7 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import edu.uiuc.cs427app.util.LogoutComponent;
 
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener{
-
+    /**
+     * Called when the DetailsActivity is first created. It initializes the user interface elements,
+     * sets up event listeners for the map action, and handles user interaction.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     * shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +44,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         buttonMap.setOnClickListener(this);
 
     }
-
+    /**
+     * Not implemented yet
+     */
     @Override
     public void onClick(View view) {
         //Implement this (create an Intent that goes to a new Activity, which shows the map)

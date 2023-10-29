@@ -20,6 +20,13 @@ import edu.uiuc.cs427app.util.Reference;
 public class AddLocActivity extends AppCompatActivity{
     private Button AddLocationB;
     private EditText cityText;
+    /**
+     * Called when the AddLocActivity is first created. It initializes the user interface elements,
+     * sets up event listeners for the add action, and handles user interaction.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     * shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +35,12 @@ public class AddLocActivity extends AppCompatActivity{
         cityText = findViewById(R.id.locationEditText);
 
         AddLocationB.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the Add button is clicked. Adds the city from the database
+             * based on the current user. Sets result to notify the parent function it added a city.
+             *
+             * @param v The view that was clicked, in this case, the add link.
+             */
             @Override
             public void onClick(View v) {
                 String city = cityText.getText().toString().toLowerCase(); //extract text from text box
