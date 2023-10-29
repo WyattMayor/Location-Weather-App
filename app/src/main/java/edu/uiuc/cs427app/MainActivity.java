@@ -194,7 +194,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //Customised-UI based on user preferences
+    /**
+     * Updates the user's theme preference (light or dark mode) in the database based on their username.
+     *
+     * @param username  The username of the user for whom the theme preference is to be updated.
+     * @param darkMode  The new theme preference (0 for light mode, 1 for dark mode).
+     */
+
     public void updateTheme(String username, String darkMode) {
         DatabaseHelper dbhelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
@@ -209,7 +215,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         db.close();
     }
-    //Customised-UI based on user preferences
+
+    /**
+     * Sets the user's theme based on their stored preference in the database. This method retrieves the
+     * user's theme preference and updates the UI accordingly.
+     *
+     * @param username  The username of the user for whom the theme is to be set.
+     */
     public void setTheme(String username) {
         DatabaseHelper dbhelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
