@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import java.util.*;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.TextView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final int RESULT_CODE = 1; // Variable returned from child function to notify parent function
 
+    DatabaseHelper dbHelper;
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //call refresh which is initial list
         refresh(Reference.CurrentUser);
+        setTheme(Reference.CurrentUser);
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,12 +83,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onCheckedChanged(CompoundButton compoundButton, boolean status) {
                         // theme is switched based on button status
                         if (status) {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                            compoundButton.setText(R.string.light_switch);
+                            updateTheme(Reference.CurrentUser,"1");
+//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                            compoundButton.setText(R.string.light_switch);
                         } else {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                            compoundButton.setText(R.string.dark_switch);
+                            updateTheme(Reference.CurrentUser,"0");
+//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                            compoundButton.setText(R.string.dark_switch);
                         }
+                        setTheme(Reference.CurrentUser);
                     }
                 });
 
@@ -92,12 +100,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //To maintain the toggle status correctly after making a theme selection
     @Override
     protected void onResume() {
-        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-            themeSwitch.setChecked(true);
-        } else {
-            themeSwitch.setChecked(false);
-        }
+        setTheme(Reference.CurrentUser);
+//        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+//        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+//            themeSwitch.setChecked(true);
+//        } else {
+//            themeSwitch.setChecked(false);
+//        }
         super.onResume();
     }
 
@@ -181,6 +190,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //Customised-UI based on user preferences
+    public void updateTheme(String username, String darkMode) {
+        DatabaseHelper dbhelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        String selector = "userName = ?";
+
+        String[] selectorArgs = {username};
+
+        ContentValues cv = new ContentValues();
+        cv.put("darkMode",darkMode);
+        db.update("User",cv,selector, selectorArgs);
+
+        db.close();
+    }
+    //Customised-UI based on user preferences
+    public void setTheme(String username) {
+        DatabaseHelper dbhelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        Cursor cursor = db.query(
+                "User", // Table name
+                null,   // Columns; null means all columns
+                "username = ?", // Selection
+                new String[] {username}, // Selection args
+                null,   // Group by
+                null,   // Having
+                null    // Order by
+        );
+        cursor.moveToFirst();
+        String darkModeEnabled  = cursor.getString(2);
+        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+        //Light Mode
+        if(darkModeEnabled.equals("0")){
+            themeSwitch.setChecked(false);
+            themeSwitch.setText(R.string.light_switch);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else { //DarkMode
+            themeSwitch.setChecked(true);
+            themeSwitch.setText(R.string.dark_switch);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+        cursor.close();
+    }
+
+
 
     @Override
     public void onClick(View view) {
@@ -203,4 +259,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
-
