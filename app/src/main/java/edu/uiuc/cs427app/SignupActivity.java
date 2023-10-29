@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import edu.uiuc.cs427app.db.*;
 
@@ -33,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         signupButton = findViewById(R.id.signupButton);
@@ -94,7 +95,7 @@ public class SignupActivity extends AppCompatActivity {
 
         if (!cursor.moveToFirst()) {
             dbHelper.insertUser(db, username, password,"0");
-            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(intent);
         } else {
             TextView errorTextView = findViewById(R.id.errorTextView);
