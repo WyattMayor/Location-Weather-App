@@ -7,12 +7,18 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.ui.AppBarConfiguration;
 import edu.uiuc.cs427app.databinding.ActivityMainBinding;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import java.util.*;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import edu.uiuc.cs427app.db.*;
 import java.io.Serializable;
 
@@ -57,6 +63,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(intent, RESULT_CODE); //Expect a return request code to notify its done
             }
         });
+
+        //Use the toggle button to switch themes
+        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+
+        //listener for detecting change in toggle status
+        themeSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    /**
+                     * Invoked when button status changed
+                     * @param status - on or off
+                     */
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean status) {
+                        // theme is switched based on button status
+                        if (status) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            compoundButton.setText(R.string.light_switch);
+                        } else {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            compoundButton.setText(R.string.dark_switch);
+                        }
+                    }
+                });
+
+    }
+
+    //To maintain the toggle status correctly after making a theme selection
+    @Override
+    protected void onResume() {
+        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            themeSwitch.setChecked(true);
+        } else {
+            themeSwitch.setChecked(false);
+        }
+        super.onResume();
     }
 
     @Override
@@ -95,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return cityList; // return list of cities
     }
+
 
     public void refresh(String username) { //Refresh/Create buttons based on the specified user's list
         LinearLayout buttonContainer = findViewById(R.id.buttonContainer);
