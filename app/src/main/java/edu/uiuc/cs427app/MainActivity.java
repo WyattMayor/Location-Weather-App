@@ -1,6 +1,5 @@
 package edu.uiuc.cs427app;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.GradientDrawable;
@@ -21,7 +20,11 @@ import android.widget.TextView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import edu.uiuc.cs427app.db.*;
-import java.io.Serializable;
+import edu.uiuc.cs427app.util.LogoutComponent;
+import edu.uiuc.cs427app.util.Reference;
+
+import android.view.Menu;
+import android.view.MenuItem;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
