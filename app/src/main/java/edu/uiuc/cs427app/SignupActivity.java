@@ -93,7 +93,7 @@ public class SignupActivity extends AppCompatActivity {
         );
 
         if (!cursor.moveToFirst()) {
-            dbHelper.insertUser(db, username, password);
+            dbHelper.insertUser(db, username, password,"0");
             Intent intent = new Intent(SignupActivity.this, MainActivity.class);
             startActivity(intent);
         } else {

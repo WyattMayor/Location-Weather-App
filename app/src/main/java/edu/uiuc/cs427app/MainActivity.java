@@ -6,12 +6,19 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.ui.AppBarConfiguration;
 import edu.uiuc.cs427app.databinding.ActivityMainBinding;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import java.util.*;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.TextView;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import edu.uiuc.cs427app.db.*;
 import edu.uiuc.cs427app.util.LogoutComponent;
 import edu.uiuc.cs427app.util.Reference;
@@ -31,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final int RESULT_CODE = 1; // Variable returned from child function to notify parent function
 
+    DatabaseHelper dbHelper;
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //call refresh which is initial list
         refresh(Reference.CurrentUser);
+        setTheme(Reference.CurrentUser);
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +71,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(intent, RESULT_CODE); //Expect a return request code to notify its done
             }
         });
+
+        //Use the toggle button to switch themes
+        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+
+        //listener for detecting change in toggle status
+        themeSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    /**
+                     * Invoked when button status changed
+                     * @param status - on or off
+                     */
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean status) {
+                        // theme is switched based on button status
+                        if (status) {
+                            updateTheme(Reference.CurrentUser,"1");
+//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                            compoundButton.setText(R.string.light_switch);
+                        } else {
+                            updateTheme(Reference.CurrentUser,"0");
+//                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                            compoundButton.setText(R.string.dark_switch);
+                        }
+                        setTheme(Reference.CurrentUser);
+                    }
+                });
+
+    }
+
+    //To maintain the toggle status correctly after making a theme selection
+    @Override
+    protected void onResume() {
+        setTheme(Reference.CurrentUser);
+//        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+//        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+//            themeSwitch.setChecked(true);
+//        } else {
+//            themeSwitch.setChecked(false);
+//        }
+        super.onResume();
     }
 
     @Override
@@ -98,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return cityList; // return list of cities
     }
+
 
     public void refresh(String username) { //Refresh/Create buttons based on the specified user's list
         LinearLayout buttonContainer = findViewById(R.id.buttonContainer);
@@ -141,6 +193,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //Customised-UI based on user preferences
+    public void updateTheme(String username, String darkMode) {
+        DatabaseHelper dbhelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        String selector = "userName = ?";
+
+        String[] selectorArgs = {username};
+
+        ContentValues cv = new ContentValues();
+        cv.put("darkMode",darkMode);
+        db.update("User",cv,selector, selectorArgs);
+
+        db.close();
+    }
+    //Customised-UI based on user preferences
+    public void setTheme(String username) {
+        DatabaseHelper dbhelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        Cursor cursor = db.query(
+                "User", // Table name
+                null,   // Columns; null means all columns
+                "username = ?", // Selection
+                new String[] {username}, // Selection args
+                null,   // Group by
+                null,   // Having
+                null    // Order by
+        );
+        cursor.moveToFirst();
+        String darkModeEnabled  = cursor.getString(2);
+        SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
+        //Light Mode
+        if(darkModeEnabled.equals("0")){
+            themeSwitch.setChecked(false);
+            themeSwitch.setText(R.string.light_switch);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else { //DarkMode
+            themeSwitch.setChecked(true);
+            themeSwitch.setText(R.string.dark_switch);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+        cursor.close();
+    }
+
+
 
     @Override
     public void onClick(View view) {
@@ -162,19 +261,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        LogoutComponent.setupOptionsMenu(this, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (LogoutComponent.handleLogoutItemSelected(item, this)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
-

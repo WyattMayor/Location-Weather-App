@@ -13,7 +13,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Define the table creation SQL statement
     private static final String CREATE_USER_TABLE = "CREATE TABLE User ("
             + "username TEXT PRIMARY KEY NOT NULL,"
-            + "password TEXT NOT NULL);";
+            + "password TEXT NOT NULL,"
+            + "darkMode TEXT NOT NULL);";
 
     private static final String CREATE_ITEM_TABLE = "CREATE TABLE Item ("
             + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -21,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "userName TEXT  NOT NULL,"
             + "FOREIGN KEY (userName) REFERENCES User(username));"; // Ensure referential integrity
 
-    private static final String INSERT_USER = "INSERT INTO User (username, password) VALUES (?, ?);";
+    private static final String INSERT_USER = "INSERT INTO User (username, password, darkMode) VALUES (?, ?, ?);";
 
     /**
      * Constructs a new instance of the DatabaseHelper class.
@@ -55,11 +56,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param db       The SQLiteDatabase instance to which the user will be added.
      * @param username The username of the user to be inserted.
      * @param password The password associated with the user.
+     * @param darkMode Either 0 and 1 and sets the theme of app
      */
-    public void insertUser(SQLiteDatabase db, String username, String password) {
+    public void insertUser(SQLiteDatabase db, String username, String password, String darkMode) {
         SQLiteStatement statement = db.compileStatement(INSERT_USER);
         statement.bindString(1, username);
         statement.bindString(2, password);
+        statement.bindString(3,darkMode);
         statement.executeInsert();
     }
 }
