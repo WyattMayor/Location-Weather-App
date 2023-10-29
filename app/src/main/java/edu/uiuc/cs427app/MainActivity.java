@@ -18,6 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.TextView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import android.content.ContentValues;
 
 import edu.uiuc.cs427app.db.*;
 import edu.uiuc.cs427app.util.LogoutComponent;
@@ -238,8 +239,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cursor.close();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        LogoutComponent.setupOptionsMenu(this, menu);
+        return true;
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (LogoutComponent.handleLogoutItemSelected(item, this)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onClick(View view) {
