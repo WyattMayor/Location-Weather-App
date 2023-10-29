@@ -37,6 +37,13 @@ public class RemoveLocActivity extends AppCompatActivity{
         });
 
     }
+
+    /**
+     * Removes the city for a specific user from the database
+     *
+     * @param username  Current user that is logged in.
+     * @param city The city name that the user inputted.
+     */
     public void removeCity(String username, String city) { // method for removing cities from the database with respect to user
         DatabaseHelper dbhelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbhelper.getWritableDatabase();

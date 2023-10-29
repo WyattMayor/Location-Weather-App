@@ -114,6 +114,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
     }
 
+    /**
+     * Waits for a response from a child intent. Utilized in the add and remove child intent to update the UI
+     * after a list change for a specific user.
+     *
+     * @param requestCode   variable that is returned from a child function.
+     * @param resultCode   variable that is returned at the end of the child function marking it finished.
+     * @param data   The data that is returned from the child function.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) { // Handle request Code If Returned
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,6 +132,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+    /**
+     * Queries the entries of the cities that are assigned to a specific username.
+     * Returns the list of cities that correspond to a specific user.
+     *
+     * @param username  The username of the user who is currently logged in.
+     */
+
     public List<String> GetCityList(String username) {
         DatabaseHelper dbhelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
@@ -151,7 +167,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return cityList; // return list of cities
     }
 
-
+    /**
+     * Resets the UI by reading in the list of cities with respect to the user.
+     * The buttons are remade using this list. Invoked at the start of the main activity
+     * and after a city is added/removed.
+     *
+     * @param username  The username of the user who is currently logged in.
+     */
     public void refresh(String username) { //Refresh/Create buttons based on the specified user's list
         LinearLayout buttonContainer = findViewById(R.id.buttonContainer);
 

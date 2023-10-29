@@ -38,6 +38,12 @@ public class AddLocActivity extends AppCompatActivity{
         });
     }
 
+    /**
+     * Adds a city to the item database for the current user
+     *
+     * @param username  Current user that is logged in.
+     * @param city The city name that the user inputted.
+     */
     public void addCity(String username, String city) { // method for added in city with respect to a user
         DatabaseHelper dbhelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
