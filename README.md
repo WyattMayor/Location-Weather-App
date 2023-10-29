@@ -32,6 +32,9 @@ Members present: Miscommunication - Most of the group though the meetings were s
 </br>
 Meeting notes: During this meeting we discussed the Requirements and Use Cases. We then divided the work up between these two task.
 <br/>
+</br>
+Progress: meeting time set, github set up, weekly report started
+<br/>
 | Name          | NetID         | GitHub ID   | Role          | Experience    |
 | ------------- | ------------- | ------------| ------------- | ------------- |
 | Wyatt Mayor | wpmayor2 |WyattMayor|Manager|C, Python, Java, SQL, HTML, CSS|
@@ -50,6 +53,9 @@ Members present: Wyatt Mayor, Nick Tsiones, Huijun Li, Michael Fadillah Wong, Su
 </br>
 Meeting notes: During this meeting we discussed the Class diagram and Transition Graph. We then divided the work up between these two task.
 <br/>
+</br>
+Progress: Milestone 1 finished, task divided for Milestone 2
+<br/>
 | Name          | NetID         | GitHub ID   | Role          | Experience    |
 | ------------- | ------------- | ------------| ------------- | ------------- |
 | Wyatt Mayor | wpmayor2 |WyattMayor|Manager|C, Python, Java, SQL, HTML, CSS|
@@ -65,9 +71,12 @@ Meeting notes: During this meeting we discussed the Class diagram and Transition
 
 <b>Week 3</b>
 </br>
-Members present: List the NetID of the people who attended the meeting
+Members present: Wyatt Mayor, Zihan Qiu, Huijun Li, Michael Fadillah Wong, Sukin Kumar Krishnasamy, Sivaa Shaanth Suman Rani Sivanath Babu, Ishika Awachat
 </br>
-Meeting notes: Explain the overall team progress and a summary of discussion
+Meeting notes: We just finished milestone two before this meeting. The main discussion of this meeting was how we would approach milestone 3. We split up the work between each team member and decided on what database we would implement.
+<br/>
+</br>
+Progress: Milestone 2 Completed, Task divided out for milestone 3, Database Selected
 <br/>
 | Name          | NetID         | GitHub ID   | Role          | Experience    |
 | ------------- | ------------- | ------------| ------------- | ------------- |
@@ -84,9 +93,12 @@ Meeting notes: Explain the overall team progress and a summary of discussion
 
 <b>Week 4</b>
 </br>
-Members present: List the NetID of the people who attended the meeting
+Members present: Wyatt Mayor, Michael Fadillah Wong
 </br>
-Meeting notes: Explain the overall team progress and a summary of discussion
+Meeting notes: This meeting was short and not very helpful because only 2 people showed up. At this point we only had a dynamic list and partial database set up. We mainly discussed how we would proceed with the database.
+<br/>
+</br>
+Progress: Milestone 3 finished
 <br/>
 | Name          | NetID         | GitHub ID   | Role          | Experience    |
 | ------------- | ------------- | ------------| ------------- | ------------- |
