@@ -66,13 +66,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Called when the signup link is clicked. It creates an intent to redirect the user to
-         * the signup activity and initiates the activity transition.
-         *
-         * @param v The view that was clicked, in this case, the signup link.
-         */
         signupLink.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when the signup link is clicked. It creates an intent to redirect the user to
+             * the signup activity and initiates the activity transition.
+             *
+             * @param v The view that was clicked, in this case, the signup link.
+             */
             @Override
             public void onClick(View v) {
                 // Redirect to signup activity.
