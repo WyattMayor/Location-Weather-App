@@ -59,6 +59,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Add sign out button to menu.
         LogoutComponent.setupOptionsMenu(this, menu);
         return true;
     }
@@ -71,6 +72,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Sign out the current user when sign out button is clicked.
         if (LogoutComponent.handleLogoutItemSelected(item, this)) {
             return true;
         }
