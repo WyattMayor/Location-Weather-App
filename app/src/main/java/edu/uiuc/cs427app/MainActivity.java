@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Returns the list of cities that correspond to a specific user.
      *
      * @param username  The username of the user who is currently logged in.
+     * @return cityList   Returns the list of cities that the users has associated with his username
      */
 
     public List<String> GetCityList(String username) {
@@ -292,12 +293,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cursor.close();
     }
+    /**
+     * create the options menu for the current activity.
+     *
+     * @param menu The options menu.
+     * @return True to display the menu, false to not display it.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         LogoutComponent.setupOptionsMenu(this, menu);
         return true;
     }
 
+    /**
+     * Called when an item in the options menu is selected.
+     *
+     * @param item The selected menu item.
+     * @return True if the event was handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (LogoutComponent.handleLogoutItemSelected(item, this)) {

@@ -70,12 +70,24 @@ public class AddLocActivity extends AppCompatActivity{
         db.close();
     }
 
+    /**
+     * create the options menu for the current activity.
+     *
+     * @param menu The options menu.
+     * @return True to display the menu, false to not display it.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         LogoutComponent.setupOptionsMenu(this, menu);
         return true;
     }
 
+    /**
+     * Called when an item in the options menu is selected.
+     *
+     * @param item The selected menu item.
+     * @return True if the event was handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (LogoutComponent.handleLogoutItemSelected(item, this)) {
