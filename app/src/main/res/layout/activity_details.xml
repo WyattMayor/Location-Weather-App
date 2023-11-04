@@ -15,19 +15,25 @@
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
-            android:id="@+id/welcomeText"
+            android:id="@+id/cityNameText"
             android:layout_width="match_parent"
-            android:layout_height="58dp" />
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="City Name" />
 
-        <TextView
-            android:id="@+id/cityInfo"
+        <Button
+            android:id="@+id/weatherButton"
             android:layout_width="match_parent"
-            android:layout_height="268dp" />
+            android:layout_height="wrap_content"
+            android:text="Weather" />
 
         <Button
             android:id="@+id/mapButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show Map" />
+            android:text="Map" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
