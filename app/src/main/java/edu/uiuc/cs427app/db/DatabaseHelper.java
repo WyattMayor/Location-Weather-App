@@ -65,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteStatement statement = db.compileStatement(INSERT_USER);
         statement.bindString(1, username);
         statement.bindString(2, password);
-        statement.bindString(3,darkMode);
+        statement.bindString(3, darkMode);
         statement.executeInsert();
     }
 }
