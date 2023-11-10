@@ -78,7 +78,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     }
     private void getLatLon(String city, Context context, LatLonCallback callback) {
         String baseUrl = "https://api.openweathermap.org/geo/1.0/direct";
-        String apiKey = "e05da8e2e7eec0f149c076e2650144f5";
+        String apiKey = "";
         String url = baseUrl + "?q=" + city + "," + "+1" +
                 "&limit=1" + "&appid=" + apiKey;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -112,7 +112,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
     private void getWeatherData(double latitude, double longitude, Context context, WeatherCallback callback) {
         String baseWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
-        String apiKey = "e05da8e2e7eec0f149c076e2650144f5";
+        String apiKey = "";
         String urlWeather = baseWeatherUrl + "lat=" + String.valueOf(latitude) + "&lon=" + String.valueOf(longitude) + "&appid=" + apiKey + "&units=imperial";
         final double[] temp = {0};
         final double[] wind_speed = {0};
