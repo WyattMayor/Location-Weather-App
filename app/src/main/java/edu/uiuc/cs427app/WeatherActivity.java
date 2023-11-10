@@ -176,16 +176,16 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                         // Handle weather data here
                         Log.d("Weather", "Temperature: " + temperature + ", Wind Speed: " + windSpeed + ", Weather: " + weatherDescription);
                         TextView temperatureTextView = findViewById(R.id.temperatureText);
-                        temperatureTextView.setText(String.valueOf(temperature));
+                        temperatureTextView.setText(String.valueOf(temperature)+ "°F");
 
                         TextView weatherConditionTextView = findViewById(R.id.weatherConditionText);
                         weatherConditionTextView.setText(weatherDescription);
 
                         TextView humidityTextView = findViewById(R.id.humidityText);
-                        humidityTextView.setText("Humidity: " + String.valueOf(humidity));
+                        humidityTextView.setText("Humidity: " + String.valueOf(humidity) +"%");
 
                         TextView windConditionTextView = findViewById(R.id.windConditionText);
-                        windConditionTextView.setText("Wind Speed: " + String.valueOf(windSpeed)+  " Wind deg: " + String.valueOf(windDegrees));
+                        windConditionTextView.setText("Wind Speed: " + String.valueOf(windSpeed) + " MPH "+  " Degree: " + String.valueOf(windDegrees)+"°");
                     }
                 });
             }
