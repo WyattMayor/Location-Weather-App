@@ -64,6 +64,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         // If the map button was clicked, start the MapActivity
         else if(view.getId() == R.id.mapButton) {
             // Add intent MapActivity.
+            intent = new Intent(this, MapsActivity.class);
+            intent.putExtra("city", cityName);
+            startActivity(intent);
         }
     }
 

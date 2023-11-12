@@ -325,4 +325,3 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 }
-
