@@ -98,7 +98,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             latitude[0] = firstObject.getDouble("lat");
                             longitude[0] = firstObject.getDouble("lon");
                             LatLng citylatlon = new LatLng(latitude[0], longitude[0]);
-                            mMap.addMarker(new MarkerOptions().position(citylatlon).title(city));
+                            mMap.addMarker(new MarkerOptions().position(citylatlon).title(city +" - Lat:"+ String.valueOf(latitude[0]) + " - Lon:" + String.valueOf(longitude[0])));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(citylatlon));
                             mMap.animateCamera( CameraUpdateFactory.zoomTo( 9.0f ) );
                         }
