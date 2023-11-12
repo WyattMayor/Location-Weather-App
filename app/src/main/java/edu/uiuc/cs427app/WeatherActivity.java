@@ -78,7 +78,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     }
     private void getLatLon(String city, Context context, LatLonCallback callback) {
         String baseUrl = "https://api.openweathermap.org/geo/1.0/direct";
-        String apiKey = ;
+        String apiKey = "";
         String url = baseUrl + "?q=" + city + "," + "+1" +
                 "&limit=1" + "&appid=" + apiKey;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -112,8 +112,8 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
     private void getWeatherData(double latitude, double longitude, Context context, WeatherCallback callback) {
         String baseWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
-        String apiKey = ;
-        String urlWeather = baseWeatherUrl + "lat=" + String.valueOf(latitude) + "&lon=" + String.valueOf(longitude) + "&appid=" + apiKey;
+        String apiKey = "";
+        String urlWeather = baseWeatherUrl + "lat=" + String.valueOf(latitude) + "&lon=" + String.valueOf(longitude) + "&appid=" + apiKey + "&units=imperial";
         final double[] temp = {0};
         final double[] wind_speed = {0};
         final double[] wind_deg = {0};
@@ -176,16 +176,16 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                         // Handle weather data here
                         Log.d("Weather", "Temperature: " + temperature + ", Wind Speed: " + windSpeed + ", Weather: " + weatherDescription);
                         TextView temperatureTextView = findViewById(R.id.temperatureText);
-                        temperatureTextView.setText(String.valueOf(temperature));
+                        temperatureTextView.setText(String.valueOf(temperature)+ "°F");
 
                         TextView weatherConditionTextView = findViewById(R.id.weatherConditionText);
                         weatherConditionTextView.setText(weatherDescription);
 
                         TextView humidityTextView = findViewById(R.id.humidityText);
-                        humidityTextView.setText("Humidity: " + String.valueOf(humidity));
+                        humidityTextView.setText("Humidity: " + String.valueOf(humidity) +"%");
 
                         TextView windConditionTextView = findViewById(R.id.windConditionText);
-                        windConditionTextView.setText("Wind Speed: " + String.valueOf(windSpeed)+  " Wind deg: " + String.valueOf(windDegrees));
+                        windConditionTextView.setText("Wind Speed: " + String.valueOf(windSpeed) + " MPH "+  " Degree: " + String.valueOf(windDegrees)+"°");
                     }
                 });
             }
@@ -325,4 +325,3 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 }
-
