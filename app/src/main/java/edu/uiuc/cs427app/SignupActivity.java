@@ -93,11 +93,14 @@ public class SignupActivity extends AppCompatActivity {
                 null    // Order by
         );
 
+        // Create an account in the database with user's username
+        // and password and send intent to LoginActivity
         if (!cursor.moveToFirst()) {
             dbHelper.insertUser(db, username, password,"0");
             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(intent);
         } else {
+            // Display sign up error
             TextView errorTextView = findViewById(R.id.errorTextView);
             errorTextView.setVisibility(View.VISIBLE);
         }

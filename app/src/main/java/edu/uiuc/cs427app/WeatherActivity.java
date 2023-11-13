@@ -153,6 +153,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         final String[] weather2 = {""};
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         Log.d("check2", urlWeather);
+        // Request weather data of specified location using GET method
         JsonObjectRequest jsonArrayRequestWeather = new JsonObjectRequest(Request.Method.GET, urlWeather, null,
                 new Response.Listener<JSONObject>() {
                     /**
@@ -163,7 +164,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-
+                            // Store retrieved weather data and send it function that will handle displaying it
                             JSONObject main = response.getJSONObject("main");
                             JSONObject wind = response.getJSONObject("wind");
                             JSONArray weatherparse = response.getJSONArray("weather");
