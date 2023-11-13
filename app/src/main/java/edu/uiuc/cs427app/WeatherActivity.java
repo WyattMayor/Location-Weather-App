@@ -69,13 +69,28 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         // Placeholder for rendering weather.
         RenderWeatherData( cityName, WeatherActivity.this);
     }
+
+    /**
+     * returned data from the getLatLon method
+     */
     public interface LatLonCallback {
         void onLatLonReceived(double latitude, double longitude);
     }
 
+    /**
+     * returned data from the getWeatherdata method
+     */
     public interface WeatherCallback {
         void onWeatherDataReceived(double temperature, double windSpeed, double windDegrees,double humidity, String weatherDescription);
     }
+
+    /**
+     * This method calls the openweathergeo API and returns the latitude and longitude of the city
+     *
+     * @param callback Method for checking if values are returned
+     * @param city Name of the city
+     * @param context ""
+     */
     private void getLatLon(String city, Context context, LatLonCallback callback) {
         String baseUrl = "https://api.openweathermap.org/geo/1.0/direct";
         String apiKey = "";
@@ -87,6 +102,11 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
 
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.GET,url,null,
                 new Response.Listener<JSONArray>() {
+                    /**
+                     * This method handles the response of the api call
+                     *
+                     * @param response Api data
+                     */
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
@@ -101,6 +121,11 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 },
                 new Response.ErrorListener() {
+                    /**
+                     * This method handles an error in the response of the api call
+                     *
+                     * @param error error that was returned
+                     */
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle errors here
@@ -109,7 +134,14 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 });
         requestQueue.add(JsonArrayRequest);
     }
-
+    /**
+     * Calls the openweathermap API and returns the weather data of the Latitude and Longitude
+     *
+     * @param callback Method for checking if values are returned
+     * @param latitude The selected cities latitude
+     * @param longitude The selected cities longitude
+     * @param context ""
+     */
     private void getWeatherData(double latitude, double longitude, Context context, WeatherCallback callback) {
         String baseWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
         String apiKey = "";
@@ -123,6 +155,11 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         Log.d("check2", urlWeather);
         JsonObjectRequest jsonArrayRequestWeather = new JsonObjectRequest(Request.Method.GET, urlWeather, null,
                 new Response.Listener<JSONObject>() {
+                    /**
+                     * Handles the response of the api call
+                     *
+                     * @param response Api data
+                     */
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
@@ -143,6 +180,11 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 },
                 new Response.ErrorListener() {
+                    /**
+                     * Handles an error in the response of the api call
+                     *
+                     * @param error error that was returned
+                     */
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle errors here
@@ -157,6 +199,8 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
      * This method serves as a placeholder for rendering weather data on the UI.
      * It should be connected to a weather API to fetch and display live data.
      *
+     * @param City The name of the city for which to display the current date and time.
+     * @param context ""
      */
     private void RenderWeatherData(String City, Context context) {
 
@@ -167,10 +211,16 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         double windDegrees= 0.0;
 
         getLatLon(City, this, new LatLonCallback() {
+            /**
+             * Checks and waits for getLatLon to finish and return data
+             */
             @Override
             public void onLatLonReceived(double latitude, double longitude) {
                 // First request completed, now make the second request
                 getWeatherData(latitude, longitude, WeatherActivity.this, new WeatherCallback() {
+                    /**
+                     * Checks and waits for getWeatherData to finish and return data
+                     */
                     @Override
                     public void onWeatherDataReceived(double temperature, double windSpeed, double windDegrees, double humidity, String weatherDescription) {
                         // Handle weather data here
@@ -190,18 +240,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 });
             }
         });
-
-        /*TextView temperatureTextView = findViewById(R.id.temperatureText);
-        temperatureTextView.setText(String.valueOf(temperature));
-
-        TextView weatherConditionTextView = findViewById(R.id.weatherConditionText);
-        weatherConditionTextView.setText(weatherDescription);
-
-        TextView humidityTextView = findViewById(R.id.humidityText);
-        humidityTextView.setText("Humidity: " + String.valueOf(humidity));
-
-        TextView windConditionTextView = findViewById(R.id.windConditionText);
-        windConditionTextView.setText("Wind: " + String.valueOf(windSpeed)+  "Wind deg: " + String.valueOf(windDegrees));*/
     }
 
     /**

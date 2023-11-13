@@ -29,7 +29,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private String cityName;
-
+    /**
+     * Called when the MapsActivity is first created. It initializes the user interface elements,
+     * sets up event listeners for the remove action, and handles user interaction.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     * shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLon(cityName, mMap, MapsActivity.this);
     }
+    /**
+     * Converts a given string to Camel Case, where the first letter of each word is capitalized and the rest are lowercase.
+     *
+     * @param textInput The string input to be converted to Camel Case.
+     * @return A Camel Case version of the input string or null if the input is null.
+     */
     private String toCamelCase(final String textInput) {
         // If the input text is null, nothing to convert
         if (textInput == null)
@@ -80,6 +92,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return textOutput.toString();
     }
+    /**
+     * Calls the openweathergeo API and returns the latitude and longitude of the city
+     *
+     * @param mMap Map interface
+     * @param city Name of the city
+     * @param context ""
+     */
     private void LatLon(String city, GoogleMap mMap, Context context) {
         String baseUrl = "https://api.openweathermap.org/geo/1.0/direct";
         String apiKey = "e05da8e2e7eec0f149c076e2650144f5";
@@ -91,6 +110,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest(Request.Method.GET,url,null,
                 new Response.Listener<JSONArray>() {
+                    /**
+                     * Handles the response of the api call
+                     *
+                     * @param response Api data
+                     */
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
@@ -107,6 +131,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 },
                 new Response.ErrorListener() {
+                    /**
+                     * Handles an error in the response of the api call
+                     *
+                     * @param error error that was returned
+                     */
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle errors here
