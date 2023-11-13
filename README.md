@@ -115,40 +115,40 @@ Progress: Milestone 3 finished
 
 <b>Week 5</b>
 </br>
-Members present: List the NetID of the people who attended the meeting
+Members present: wpmayor2, huijunl2, kf14, sk119, ntsiones, ssr10, awachat2, Zihanq3
 </br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
+Meeting notes: This was a short meeting we mainly discussed how we were going to section off the task for milestone 4.
+<br/>
+| Name          | NetID         | GitHub ID   | Role          | Experience    |
+| ------------- | ------------- | ------------| ------------- | ------------- |
+| Wyatt Mayor | wpmayor2 |WyattMayor|Manager|C, Python, Java, SQL, HTML, CSS|
+| Nick Tsiones |tsiones2|ntsiones|Tech Lead|C, C++, Python, Java, SQL, NoSQL, AI, HTML, CSS, Javascript|
+| Huijun Lin | huijunl2 |huijunl2|Developer|Python, SQL|
+| Michael Fadillah Wong   |kf14|kfadillah|Developer|Java, Python, SQL|
+| Sukin Kumar Krishnasamy |sk119|sukin98|Developer|Java, Python, SQL, Firebase, MongoDB|
+| Sivaa Shaanth Suman Rani Sivanath Babu|ssr10|sivaa-shaanth|Developer|Java, Python, SQL|
+| Ishika Awachat |awachat2|ishikaawachat|Developer|C++, Python, Java, SQL, HTML, Javascript|
+| Zihan Qiu |Zihanq3|qiuzan2001|Developer|C++, Java, Python, SQL|
+<br/>
 
 
 <b>Week 6</b>
 </br>
-Members present: List the NetID of the people who attended the meeting
+Members present: wpmayor2, huijunl2, kf14, Zihanq3, awachat2
 </br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
+Meeting notes: Went over current progress of milestone 4. At this point we had weather api implemented and had some issues with the map api. We discussed how we could appraoch the problem we were having and how to finish it. WE finished the meeting by figuring out how much we had left and who was going to do what.
+<br/>
+| Name          | NetID         | GitHub ID   | Role          | Experience    |
+| ------------- | ------------- | ------------| ------------- | ------------- |
+| Wyatt Mayor | wpmayor2 |WyattMayor|Manager|C, Python, Java, SQL, HTML, CSS|
+| Nick Tsiones |tsiones2|ntsiones|Tech Lead|C, C++, Python, Java, SQL, NoSQL, AI, HTML, CSS, Javascript|
+| Huijun Lin | huijunl2 |huijunl2|Developer|Python, SQL|
+| Michael Fadillah Wong   |kf14|kfadillah|Developer|Java, Python, SQL|
+| Sukin Kumar Krishnasamy |sk119|sukin98|Developer|Java, Python, SQL, Firebase, MongoDB|
+| Sivaa Shaanth Suman Rani Sivanath Babu|ssr10|sivaa-shaanth|Developer|Java, Python, SQL|
+| Ishika Awachat |awachat2|ishikaawachat|Developer|C++, Python, Java, SQL, HTML, Javascript|
+| Zihan Qiu |Zihanq3|qiuzan2001|Developer|C++, Java, Python, SQL|
+<br/>
 
 
 <b>Week 7</b>
