@@ -61,10 +61,12 @@ public class AddLocActivity extends AppCompatActivity{
         DatabaseHelper dbhelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
 
+        // Takes info of which user wants to add what city to their list
         ContentValues values = new ContentValues();
         values.put("userName", username);
         values.put("city", city);
 
+        // inserts user and new city int database
         db.insert("Item", null, values);
 
         db.close();

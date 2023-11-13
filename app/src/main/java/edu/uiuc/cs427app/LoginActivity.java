@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             Reference.CurrentUser = username;
             // Start the SignupActivity
             startActivity(intent);
-        } else {
+        } else { // Error with login
             TextView errorTextView = findViewById(R.id.errorTextView);
             errorTextView.setVisibility(View.VISIBLE);
         }

@@ -65,6 +65,7 @@ public class RemoveLocActivity extends AppCompatActivity{
 
         String[] whereArgs = {username, city};
 
+        // removes city from specific user's list of cities in database
         db.delete("Item",where, whereArgs);
 
         db.close();

@@ -268,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DatabaseHelper dbhelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
 
+
         Cursor cursor = db.query(
                 "User", // Table name
                 null,   // Columns; null means all columns
@@ -278,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 null    // Order by
         );
         cursor.moveToFirst();
+        // stores user info in database of  if they have dark mode on or not
         String darkModeEnabled  = cursor.getString(2);
         SwitchMaterial themeSwitch = findViewById(R.id.themeToggle);
         //Light Mode
@@ -338,6 +340,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Button clicked = (Button) view;
                 String cityName = clicked.getText().toString();
 
+                // Sends user to DetailsActivity class with information on which location they want
+                // weather details of
                 intent = new Intent(this, DetailsActivity.class);
                 intent.putExtra("city", cityName);
                 startActivity(intent);
