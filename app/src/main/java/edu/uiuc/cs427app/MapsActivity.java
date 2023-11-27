@@ -99,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @param city Name of the city
      * @param context ""
      */
-    private void LatLon(String city, GoogleMap mMap, Context context) {
+    protected void LatLon(String city, GoogleMap mMap, Context context) {
         String baseUrl = "https://api.openweathermap.org/geo/1.0/direct";
         String apiKey = "";
         String url = baseUrl + "?q=" + city + "," + "+1" +
