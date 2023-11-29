@@ -68,4 +68,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         statement.bindString(3, darkMode);
         statement.executeInsert();
     }
+
+    /**
+     * Deletes a new user in the database with the provided username and password.
+     *
+     * @param db       The SQLiteDatabase instance to which the user will be added.
+     * @param username The username of the user to be inserted.
+     */
+    public void deleteUser(SQLiteDatabase db, String username) {
+        String whereClause = "username = ?";
+        String[] whereArgs = new String[] { username };
+        db.delete("User", whereClause, whereArgs);
+    }
 }
