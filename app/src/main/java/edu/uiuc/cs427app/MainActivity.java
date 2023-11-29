@@ -1,5 +1,6 @@
 package edu.uiuc.cs427app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.GradientDrawable;
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (cursor.moveToFirst()) {
                 do {
                     //  Get the city name and add it to the list
-                    String cityName = cursor.getString(cursor.getColumnIndex("city"));
+                    @SuppressLint("Range") String cityName = cursor.getString(cursor.getColumnIndex("city"));
                     cityList.add(cityName);
                 } while (cursor.moveToNext()); // continue this process until all cities are added to the list
             }
