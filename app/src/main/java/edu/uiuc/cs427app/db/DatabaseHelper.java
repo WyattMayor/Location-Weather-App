@@ -80,4 +80,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] whereArgs = new String[] { username };
         db.delete("User", whereClause, whereArgs);
     }
+
+
 }

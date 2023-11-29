@@ -117,4 +117,8 @@ public class LoginActivity extends AppCompatActivity {
 
         cursor.close();
     }
+
+    public void setDatabaseHelper(SQLiteDatabase databaseHelper) {
+        db = databaseHelper;
+    }
 }

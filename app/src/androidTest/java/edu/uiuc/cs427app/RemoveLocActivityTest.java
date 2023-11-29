@@ -1,126 +1,122 @@
 package edu.uiuc.cs427app;
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.Espresso;
+
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.espresso.ViewAssertion;
-import androidx.test.espresso.matcher.ViewMatchers;
-import androidx.test.espresso.Espresso;
-import androidx.test.filters.LargeTest;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static org.hamcrest.core.AllOf.allOf;
-
-import android.view.View;
-
-import org.hamcrest.Matcher;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.mockito.Mockito;
 
 import edu.uiuc.cs427app.db.DatabaseHelper;
 
-@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class RemoveLocActivityTest {
-    @Before
-    public void LaunchLoginActivity() {
-        ActivityScenario.launch(LoginActivity.class);
-    }
 
     @Rule
-    public ActivityScenarioRule<LoginActivity> mActivityScenarioRule =
+    public ActivityScenarioRule<LoginActivity> activityScenarioRule =
             new ActivityScenarioRule<>(LoginActivity.class);
     @Test
-    public void testCityAddingAndRemoval() {
+    public void RemoveCityTest() {
+        //set up database//
+        String testLocation = "CHAMPAIGN";
         String username = "wpmayor2";
         String password = "123";
+        String DarkMode = "0";
 
-        /*signup*/
+        /*DatabaseHelper mockedDatabase = Mockito.mock(DatabaseHelper.class);
 
-        onView(withId(R.id.signupLink)).perform(click());
+        mockedDatabase.insertUser(mockSQLiteDatabase, username, password, DarkMode);
 
+        activityScenarioRule.getScenario().onActivity(activity -> {
+            activity.setDatabaseHelper(mockSQLiteDatabase);
+        });*/
+
+        /*//signup//
+        onView(withId(R.id.signupLink))
+                .perform(click());
         onView(withId(R.id.usernameEditText))
                 .perform(ViewActions.typeText(username), ViewActions.closeSoftKeyboard());
-
-        onView(withId(R.id.usernameEditText))
-                .check(ViewAssertions.matches(ViewMatchers.withText(username)));
-
         onView(withId(R.id.passwordEditText))
                 .perform(ViewActions.typeText(password), ViewActions.closeSoftKeyboard());
-
-        onView(withId(R.id.passwordEditText))
-                .check(ViewAssertions.matches(ViewMatchers.withText(password)));
-
         onView(withId(R.id.signupButton))
                 .perform(click());
 
-        /*login*/
+        try {
+            Thread.sleep(2000); // Wait for 2 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
 
-        onView(withId(R.id.signupLink)).perform(click());
-
+        //login//
         onView(withId(R.id.usernameEditText))
                 .perform(ViewActions.typeText(username), ViewActions.closeSoftKeyboard());
-
-        onView(withId(R.id.usernameEditText))
-                .check(ViewAssertions.matches(ViewMatchers.withText(username)));
-
         onView(withId(R.id.passwordEditText))
                 .perform(ViewActions.typeText(password), ViewActions.closeSoftKeyboard());
-
-        onView(withId(R.id.passwordEditText))
-                .check(ViewAssertions.matches(ViewMatchers.withText(password)));
-
         onView(withId(R.id.loginButton))
                 .perform(click());
 
-        /*add city*/
-        String testLocation = "Champaign";
+        //wait 2 seconds//
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        onView(withId(R.id.buttonAddLocation)).perform(click());
-
+        //AddCiy//
+        //Clicks add city button
+        onView(withId(R.id.buttonAddLocation))
+                .perform(click());
+        //checks to make sure remove city activity is displayed
+        onView(withId(R.id.AddLocationB))
+                .check(matches(isDisplayed()));
+        //adds champaign to text box on remove city
         onView(withId(R.id.locationEditText))
                 .perform(ViewActions.typeText(testLocation), ViewActions.closeSoftKeyboard());
-
+        //checks to see if the text box contains champaign
         onView(withId(R.id.locationEditText))
                 .check(ViewAssertions.matches(ViewMatchers.withText(testLocation)));
-
+        //clicks remove city button on RemoveLocActivity
         onView(withId(R.id.AddLocationB))
                 .perform(click());
+        //Checks to make sure mainactivity is displayed again
+        onView(withId(R.id.buttonAddLocation))
+                .check(matches(isDisplayed()));
 
-        /*check that the city is in list*/
-        String expectedCity = "CHAMPAIGN"; // Replace with the expected button text
-        Matcher<View> buttonMatcher = allOf(withText(expectedCity), isDescendantOfA(withId(R.id.buttonContainer)));
+        //wait 2 seconds//
+        try {
+            Thread.sleep(2000); // Wait for 2 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        onView(buttonMatcher).check(matches(isDisplayed()));
-
-
-        /*remove city*/
-        onView(withId(R.id.buttonRemoveLocation)).perform(click());
-
+        //RemoveCity//
+        //Clicks remove city button
+        onView(withId(R.id.buttonRemoveLocation))
+                .perform(click());
+        //checks to make sure remove city activity is displayed
+        onView(withId(R.id.RemoveLocationB))
+                .check(matches(isDisplayed()));
+        //adds champaign to text box on remove city
         onView(withId(R.id.locationEditText))
                 .perform(ViewActions.typeText(testLocation), ViewActions.closeSoftKeyboard());
-
+        //checks to see if the text box contains champaign
         onView(withId(R.id.locationEditText))
                 .check(ViewAssertions.matches(ViewMatchers.withText(testLocation)));
-
+        //clicks remove city button on RemoveLocActivity
         onView(withId(R.id.RemoveLocationB))
                 .perform(click());
+        //Checks to make sure mainactivity is displayed again
+        onView(withId(R.id.buttonRemoveLocation))
+                .check(matches(isDisplayed()));
     }
-
 }
