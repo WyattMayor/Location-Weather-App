@@ -20,13 +20,15 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-public class SignOutTest {
+public class AuthenticationTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> activityScenarioRule = new ActivityScenarioRule<>(LoginActivity.class);
@@ -49,6 +51,41 @@ public class SignOutTest {
         db.close();
     }
 
+    @Test
+    public void testSignUp() {
+        // Simulate signup
+        onView(withId(R.id.signupLink)).perform(click());
+        intended(hasComponent(SignupActivity.class.getName()));
+        onView(withId(R.id.usernameEditText)).perform(typeText("abc"));
+        onView(withId(R.id.passwordEditText)).perform(typeText("123"));
+        onView(withId(R.id.signupButton)).perform(click());
+        // Verify go back to login activity
+        intended(hasComponent(LoginActivity.class.getName()));
+
+        // Simulate signup error
+        onView(withId(R.id.signupLink)).perform(click());
+        onView(withId(R.id.usernameEditText)).perform(typeText("abc"));
+        onView(withId(R.id.passwordEditText)).perform(typeText("123"));
+        onView(withId(R.id.signupButton)).perform(click());
+        onView(withId(R.id.errorTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.loginLink)).perform(click());
+
+        // Verify login
+        onView(withId(R.id.usernameEditText)).perform(typeText("abc"));
+        onView(withId(R.id.passwordEditText)).perform(typeText("123"));
+        onView(withId(R.id.loginButton)).perform(click());
+        intended(hasComponent(MainActivity.class.getName()));
+    }
+
+    @Test
+    public void testInvalidLogin() {
+        // Simulate login
+        onView(withId(R.id.usernameEditText)).perform(typeText("invalid"));
+        onView(withId(R.id.passwordEditText)).perform(typeText("invalid"));
+        onView(withId(R.id.loginButton)).perform(click());
+        // Verify errorText view displayed
+        onView(withId(R.id.errorTextView)).check(matches(isDisplayed()));
+    }
     @Test
     public void testSignOut() {
         // Simulate login
@@ -83,7 +120,7 @@ public class SignOutTest {
 
         // Delete test user from the database
         dbHelper.deleteUser(db, "testuser");
-
+        dbHelper.deleteUser(db, "abc");
         db.close();
     }
 }
