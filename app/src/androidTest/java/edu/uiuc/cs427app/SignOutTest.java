@@ -14,12 +14,17 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.containsString;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Button;
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +35,7 @@ import org.junit.runner.RunWith;
 import edu.uiuc.cs427app.db.DatabaseHelper;
 
 @RunWith(AndroidJUnit4.class)
-public class RemoveAndAddLocActivityTest {
+public class SignOutTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> activityScenarioRule =
@@ -58,18 +63,19 @@ public class RemoveAndAddLocActivityTest {
     @Test
     public void RemoveAndAddCityTest() {
         //set up database//
-        String testLocation = "CHAMPAIGN";
         String username = "test";
         String password = "testuser";
 
-        //login//
+        //Sign out MainActivity//
         onView(withId(R.id.usernameEditText))
                 .perform(ViewActions.typeText(username), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.passwordEditText))
                 .perform(ViewActions.typeText(password), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.loginButton))
                 .perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
+        openContextualActionModeOverflowMenu();
+        onView(withText("Sign Out")).perform(click());
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
 
         //wait 2 seconds//
         try {
@@ -78,36 +84,66 @@ public class RemoveAndAddLocActivityTest {
             e.printStackTrace();
         }
 
-        //AddCiy//
+        //Sign out RemoveLocActivity//
+        onView(withId(R.id.usernameEditText))
+                .perform(ViewActions.typeText(username), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.passwordEditText))
+                .perform(ViewActions.typeText(password), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.loginButton))
+                .perform(click());
+        onView(withId(R.id.buttonRemoveLocation))
+                .perform(click());
+        openContextualActionModeOverflowMenu();
+        onView(withText("Sign Out")).perform(click());
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
+
+        //wait 2 seconds//
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //Sign out AddActivity//
+        onView(withId(R.id.usernameEditText))
+                .perform(ViewActions.typeText(username), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.passwordEditText))
+                .perform(ViewActions.typeText(password), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.loginButton))
+                .perform(click());
         onView(withId(R.id.buttonAddLocation))
                 .perform(click());
-        intended(hasComponent(AddLocActivity.class.getName()));
+        openContextualActionModeOverflowMenu();
+        onView(withText("Sign Out")).perform(click());
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
+
+        //wait 2 seconds
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //Sign out DetailsActivity//
+        onView(withId(R.id.usernameEditText))
+                .perform(ViewActions.typeText(username), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.passwordEditText))
+                .perform(ViewActions.typeText(password), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.loginButton))
+                .perform(click());
+        String testLocation ="champaign";
+        onView(withId(R.id.buttonAddLocation))
+                .perform(click());
         onView(withId(R.id.locationEditText))
                 .perform(ViewActions.typeText(testLocation), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.locationEditText))
                 .check(ViewAssertions.matches(ViewMatchers.withText(testLocation)));
         onView(withId(R.id.AddLocationB))
                 .perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-
-        //wait 2 seconds//
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //RemoveCity//
-        onView(withId(R.id.buttonRemoveLocation))
-                .perform(click());
-        intended(hasComponent(RemoveLocActivity.class.getName()));
-        onView(withId(R.id.locationEditText))
-                .perform(ViewActions.typeText(testLocation), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.locationEditText))
-                .check(ViewAssertions.matches(ViewMatchers.withText(testLocation)));
-        onView(withId(R.id.RemoveLocationB))
-                .perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
+        onView(allOf(withText(containsString("champaign")), isAssignableFrom(Button.class))).perform(click());
+        openContextualActionModeOverflowMenu();
+        onView(withText("Sign Out")).perform(click());
+        onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
     }
     @After
     public void tearDown() throws Exception {
