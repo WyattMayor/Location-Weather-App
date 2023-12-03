@@ -69,6 +69,12 @@ public class WeatherTest {
         onView(withId(R.id.temperatureText)).check(matches(withTextPattern("\\d+\\.\\d+°F")));
         onView(withId(R.id.humidityText)).check(matches(withTextPattern("Humidity: \\d+\\.\\d+%")));
         onView(withId(R.id.windConditionText)).check(matches(withTextPattern("Wind Speed: \\d+\\.\\d+ MPH, Degree: \\d+\\.\\d+°")));
+        //wait 2 seconds//
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @After

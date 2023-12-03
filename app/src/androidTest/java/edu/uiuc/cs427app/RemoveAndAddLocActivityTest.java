@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
 import edu.uiuc.cs427app.db.DatabaseHelper;
 
 @RunWith(AndroidJUnit4.class)
-public class RemoveLocActivityTest {
+public class RemoveAndAddLocActivityTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> activityScenarioRule =
@@ -56,7 +56,7 @@ public class RemoveLocActivityTest {
     }
 
     @Test
-    public void RemoveCityTest() {
+    public void RemoveAndAddCityTest() {
         //set up database//
         String testLocation = "CHAMPAIGN";
         String username = "test";

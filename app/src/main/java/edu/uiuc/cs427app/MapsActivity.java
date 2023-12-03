@@ -101,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     protected void LatLon(String city, GoogleMap mMap, Context context) {
         String baseUrl = "https://api.openweathermap.org/geo/1.0/direct";
-        String apiKey = "";
+        String apiKey = "e05da8e2e7eec0f149c076e2650144f5";
         String url = baseUrl + "?q=" + city + "," + "+1" +
                 "&limit=1" + "&appid=" + apiKey;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
