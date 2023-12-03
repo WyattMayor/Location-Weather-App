@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -26,12 +27,17 @@ import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class AuthenticationTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> activityScenarioRule = new ActivityScenarioRule<>(LoginActivity.class);
+
+    DatabaseHelper dbHelper;
+    SQLiteDatabase db;
     @Before
     public void setUp() throws Exception {
         Intents.init();
@@ -40,20 +46,21 @@ public class AuthenticationTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         // Initialize the DatabaseHelper
-        DatabaseHelper dbHelper = new DatabaseHelper(appContext);
+        dbHelper = new DatabaseHelper(appContext);
 
         // Get writable database
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db = dbHelper.getWritableDatabase();
 
         // Insert test user into the database
         dbHelper.insertUser(db, "testuser", "testpassword", "0");
 
-        db.close();
     }
 
     @Test
     public void testSignUp() {
         // Simulate signup
+
+        assertFalse(dbHelper.findUser(db, "abc", "123"));
         onView(withId(R.id.signupLink)).perform(click());
         intended(hasComponent(SignupActivity.class.getName()));
         onView(withId(R.id.usernameEditText)).perform(typeText("abc"));
@@ -69,7 +76,7 @@ public class AuthenticationTest {
         onView(withId(R.id.signupButton)).perform(click());
         onView(withId(R.id.errorTextView)).check(matches(isDisplayed()));
         onView(withId(R.id.loginLink)).perform(click());
-
+        assertTrue(dbHelper.findUser(db, "abc", "123"));
         // Verify login
         onView(withId(R.id.usernameEditText)).perform(typeText("abc"));
         onView(withId(R.id.passwordEditText)).perform(typeText("123"));
@@ -79,6 +86,7 @@ public class AuthenticationTest {
 
     @Test
     public void testInvalidLogin() {
+        assertFalse(dbHelper.findUser(db, "invalid", "invalid"));
         // Simulate login
         onView(withId(R.id.usernameEditText)).perform(typeText("invalid"));
         onView(withId(R.id.passwordEditText)).perform(typeText("invalid"));
@@ -92,7 +100,6 @@ public class AuthenticationTest {
         onView(withId(R.id.usernameEditText)).perform(typeText("testuser"));
         onView(withId(R.id.passwordEditText)).perform(typeText("testpassword"));
         onView(withId(R.id.loginButton)).perform(click());
-
         // Verify MainActivity is loaded
         intended(hasComponent(MainActivity.class.getName()));
 
@@ -108,15 +115,6 @@ public class AuthenticationTest {
     @After
     public void tearDown() throws Exception {
         Intents.release();
-
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
-        // Initialize the DatabaseHelper
-        DatabaseHelper dbHelper = new DatabaseHelper(appContext);
-
-        // Get writable database
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Delete test user from the database
         dbHelper.deleteUser(db, "testuser");
