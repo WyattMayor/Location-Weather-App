@@ -1,6 +1,7 @@
 package edu.uiuc.cs427app.db;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
@@ -81,5 +82,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete("User", whereClause, whereArgs);
     }
 
+    public boolean findUser(SQLiteDatabase db, String username, String password) {
+        Cursor cursor = db.query(
+                "User", // Table name
+                null,   // Columns; null means all columns
+                "username = ? AND password = ?", // Selection
+                new String[] { "abc", "123" }, // Selection args
+                null,   // Group by
+                null,   // Having
+                null    // Order by
+        );
+
+        return cursor.moveToFirst();
+    }
 
 }
