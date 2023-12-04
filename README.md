@@ -151,115 +151,58 @@ Meeting notes: Went over current progress of milestone 4. At this point we had w
 <br/>
 
 
+
 <b>Week 7</b>
 </br>
-Members present: List the NetID of the people who attended the meeting
+Members present: No meeting
 </br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
-
+Meeting notes: We just finished the milestone and did not have much to discuss. We used campuswire to break up the work.
+<br/>
+| Name          | NetID         | GitHub ID   | Role          | Experience    |
+| ------------- | ------------- | ------------| ------------- | ------------- |
+| Wyatt Mayor | wpmayor2 |WyattMayor|Manager|C, Python, Java, SQL, HTML, CSS|
+| Nick Tsiones |tsiones2|ntsiones|Tech Lead|C, C++, Python, Java, SQL, NoSQL, AI, HTML, CSS, Javascript|
+| Huijun Lin | huijunl2 |huijunl2|Developer|Python, SQL|
+| Michael Fadillah Wong   |kf14|kfadillah|Developer|Java, Python, SQL|
+| Sukin Kumar Krishnasamy |sk119|sukin98|Developer|Java, Python, SQL, Firebase, MongoDB|
+| Sivaa Shaanth Suman Rani Sivanath Babu|ssr10|sivaa-shaanth|Developer|Java, Python, SQL|
+| Ishika Awachat |awachat2|ishikaawachat|Developer|C++, Python, Java, SQL, HTML, Javascript|
+| Zihan Qiu |Zihanq3|qiuzan2001|Developer|C++, Java, Python, SQL|
+<br/>
 
 <b>Week 8</b>
 </br>
-Members present: List the NetID of the people who attended the meeting
+Members present: Thanksgiving - no meeting
 </br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
+Meeting notes: We discussed any issues we had with the test in campuswire because of the holiday.
+<br/>
+| Name          | NetID         | GitHub ID   | Role          | Experience    |
+| ------------- | ------------- | ------------| ------------- | ------------- |
+| Wyatt Mayor | wpmayor2 |WyattMayor|Manager|C, Python, Java, SQL, HTML, CSS|
+| Nick Tsiones |tsiones2|ntsiones|Tech Lead|C, C++, Python, Java, SQL, NoSQL, AI, HTML, CSS, Javascript|
+| Huijun Lin | huijunl2 |huijunl2|Developer|Python, SQL|
+| Michael Fadillah Wong   |kf14|kfadillah|Developer|Java, Python, SQL|
+| Sukin Kumar Krishnasamy |sk119|sukin98|Developer|Java, Python, SQL, Firebase, MongoDB|
+| Sivaa Shaanth Suman Rani Sivanath Babu|ssr10|sivaa-shaanth|Developer|Java, Python, SQL|
+| Ishika Awachat |awachat2|ishikaawachat|Developer|C++, Python, Java, SQL, HTML, Javascript|
+| Zihan Qiu |Zihanq3|qiuzan2001|Developer|C++, Java, Python, SQL|
+<br/>
 
 
 <b>Week 9</b>
 </br>
-Members present: List the NetID of the people who attended the meeting
+Members present: wpmayor2, kf14
 </br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
-
-
-<b>Week 10</b>
-</br>
-Members present: List the NetID of the people who attended the meeting
-</br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
-
-
-<b>Week 11</b>
-</br>
-Members present: List the NetID of the people who attended the meeting
-</br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
-
-
-<b>Week 12</b>
-</br>
-Members present: List the NetID of the people who attended the meeting
-</br>
-Meeting notes: Explain the overall team progress and a summary of discussion
-</br>
-| NetID          | Progress from last week         | Tasks for next week   |
-| ---------------| --------------------------------| ----------------------|
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-|                |                                 |                       |
-</br>
+Meeting notes: We dicussed how we were going to implement the map test and our current progress. There was only two people at the meeting so we discussed the issues we both were running into.
+<br/>
+| Name          | NetID         | GitHub ID   | Role          | Experience    |
+| ------------- | ------------- | ------------| ------------- | ------------- |
+| Wyatt Mayor | wpmayor2 |WyattMayor|Manager|C, Python, Java, SQL, HTML, CSS|
+| Nick Tsiones |tsiones2|ntsiones|Tech Lead|C, C++, Python, Java, SQL, NoSQL, AI, HTML, CSS, Javascript|
+| Huijun Lin | huijunl2 |huijunl2|Developer|Python, SQL|
+| Michael Fadillah Wong   |kf14|kfadillah|Developer|Java, Python, SQL|
+| Sukin Kumar Krishnasamy |sk119|sukin98|Developer|Java, Python, SQL, Firebase, MongoDB|
+| Sivaa Shaanth Suman Rani Sivanath Babu|ssr10|sivaa-shaanth|Developer|Java, Python, SQL|
+| Ishika Awachat |awachat2|ishikaawachat|Developer|C++, Python, Java, SQL, HTML, Javascript|
+| Zihan Qiu |Zihanq3|qiuzan2001|Developer|C++, Java, Python, SQL|
+<br/>
