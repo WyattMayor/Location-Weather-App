@@ -17,8 +17,10 @@ import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.junit.Assert.*;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.junit.After;
@@ -51,6 +53,17 @@ public class RemoveLocActivityTest {
 
         // Insert test user into the database
         dbHelper.insertUser(db, "test", "testuser", "0");
+
+        // Query the database for the inserted user
+        Cursor cursor = db.query("User", null, "username=?", new String[]{"testuser"}, null, null, null);
+
+        // Assert that the user was inserted.
+        assertNotNull("Cursor is null, user not found", cursor);
+
+        // Close the cursor and database
+        cursor.close();
+
+
 
         db.close();
     }
