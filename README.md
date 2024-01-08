@@ -1,5 +1,17 @@
 # Term-Project
-The code for CS427 Android app. 
+This project was a team project were we developed an android app with location and weather capabilities.
+
+Key Features:
+
+  User-Friendly Login: Get started with ease! Our secure and straightforward login process ensures your data is safe while providing quick access to the app's features.
+
+  Real-Time Weather Updates: Stay ahead of the weather! Our app provides accurate and up-to-date weather forecasts. Whether it's a sunny day or a stormy evening, you'll be prepared for whatever the weather throws your way.
+
+  Precise Location Services: Discover and explore with confidence! Our location feature helps you find exactly where you are and guides you to where you want to be. It's perfect for daily commutes, travel adventures, or just exploring new areas in your city.
+
+  Easy Sign-Out: Your security is our priority. With a single tap, securely sign out of the app, ensuring your personal information remains private.
+
+  Comprehensive Test Suite: Quality you can trust! Our app has undergone extensive testing to guarantee a smooth, bug-free experience. We’ve rigorously tested each feature to ensure reliability and performance.
 <br/>
 <br/>
 
